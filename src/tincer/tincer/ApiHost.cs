@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http.SelfHost;
+using tincer.Discovery;
 
 namespace tincer
 {
@@ -15,15 +16,23 @@ namespace tincer
             if (mServer != null) throw new InvalidOperationException();
             mServer = new HttpSelfHostServer(Configure());
             mServer.OpenAsync().Wait();
+            beacon = new Beacon();
         }
         public void Stop()
         {
             if (mServer == null) throw new InvalidOperationException();
             mServer.CloseAsync().Wait();
+            try
+            {
+                ((IDisposable)beacon).Dispose();
+            }
+            catch { }
+            beacon = null;
             mServer = null;
             mConfig = null;
         }
-
+        static private Beacon beacon = null;
+        public static Beacon Beacon { get { return beacon; } }
         private HttpSelfHostServer mServer = null;
         private HttpSelfHostConfiguration mConfig = null;
 
