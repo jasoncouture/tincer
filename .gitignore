@@ -213,3 +213,9 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+#Executables, installers and debug symbols.
+*.dll
+*.msi
+
+/src/tincer/packages
