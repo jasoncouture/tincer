@@ -43,7 +43,7 @@ namespace tincer
             {
                 try
                 {
-                    Console.WriteLine("Starting API Server on http://{0}:{1}/", Arguments.Global.ListenAddress, Arguments.Global.ListenPort);
+                    Console.WriteLine("Starting API Server on http://{0}:{1}/ with id: {2}", Arguments.Global.ListenAddress, Arguments.Global.ListenPort, ApiHost.Id);
                     ApiHost server = new ApiHost();
                     server.Start();
                     Console.WriteLine("Started successfully, press any key to shutdown.");
